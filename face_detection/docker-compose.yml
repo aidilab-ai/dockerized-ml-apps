@@ -1,0 +1,19 @@
+version: '3'
+services:
+  face_detector:
+    image: anfri/face_detector
+    environment:
+      CONFIDENCE: 0.5
+      BIND_ADDRESS: 'face_detector'
+      COMMUNICATION_PORT: 60000
+    devices:
+      - '/dev/video0'
+  video_browser:
+    image: anfri/video_browser
+    ports:
+      - '8080:8080'
+    environment:
+      SERVER_ADDRESS: 'face_detector'
+      SERVER_PORT: 60000
+      FLASK_ADDRESS: '0.0.0.0'
+      FLASK_PORT: 8080
